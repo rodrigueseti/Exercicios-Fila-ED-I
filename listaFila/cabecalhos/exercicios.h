@@ -1,4 +1,6 @@
-void exe2(void)
+
+/*
+void exe2 (void)
 {
 	filaCirc fc;
 	init(fc);
@@ -64,3 +66,5 @@ void exe2(void)
 	
 	fclose(txtfp);
 }
+*/
+
