@@ -32,10 +32,10 @@ void enQueue (priorityCircularQueueType &q, item elem)
 	int testLimit = q.size;
 	// testLimit recebe a quantidade de elementos antes de q.size incrementar
 	
-	if (q.rear == MAX_QUEUE - 1) {
+	/*if (q.rear == MAX_QUEUE - 1) {
 		
 		q.rear = 0;
-		i = 0;
+		i = q.rear;
 		j = MAX_QUEUE - 1;
 		
 	} else {
@@ -43,8 +43,12 @@ void enQueue (priorityCircularQueueType &q, item elem)
 		q.rear++;
 		i = q.rear;
 		j = q.rear - 1;
-	}
-	//printf("\nPassou1");
+	}*/
+	
+	q.rear = (q.rear == MAX_QUEUE - 1) ? 0 : q.rear + 1;
+	i = q.rear;
+	j = (!i) ? MAX_QUEUE - 1 : q.rear - 1;
+	//j = (!q.rear) ? MAX_QUEUE - 1 : q.rear - 1; //Mesmo resultado da linha acima
 	
 	q.queue[q.rear] = elem;
 	
@@ -54,8 +58,8 @@ void enQueue (priorityCircularQueueType &q, item elem)
 		q.queue[i] = q.queue[j];
 		q.queue[j] = aux;
 		
-		i = j;
-		j--;
+		i = j--;
+		//j--;
 		testLimit--;
 		
 		j = (i == 0) ? MAX_QUEUE - 1 : j;
