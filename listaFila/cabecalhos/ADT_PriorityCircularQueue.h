@@ -62,7 +62,8 @@ void enQueue (priorityCircularQueueType &q, item elem)
 		//j--;
 		testLimit--;
 		
-		j = (i == 0) ? MAX_QUEUE - 1 : j;
+		//j = (i == 0) ? MAX_QUEUE - 1 : j;
+		j = (!i) ? MAX_QUEUE - 1 : j;
 	}
 	q.size++;
 }
