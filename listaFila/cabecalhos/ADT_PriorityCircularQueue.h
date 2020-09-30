@@ -52,7 +52,7 @@ void enQueue (priorityCircularQueueType &q, item elem)
 	
 	q.queue[q.rear] = elem;
 	
-	while (testLimit > 0 && q.queue[i].priority < q.queue[j].priority) {
+	while (testLimit /*> 0*/ && q.queue[i].priority < q.queue[j].priority) {
 		
 		aux = q.queue[i];
 		q.queue[i] = q.queue[j];
