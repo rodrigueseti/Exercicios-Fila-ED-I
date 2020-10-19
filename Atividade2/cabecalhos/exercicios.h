@@ -1,66 +1,69 @@
-void exe2(void)
+void exe2(int tmpF, int tmpA)
 {
-	filaCirc fc;
-	init(fc);
+	filaCirc fc[4];
 	
-	int tempoSema;
-	int saidas = 0;
+	init(fc[0]);
+	init(fc[1]);
+	
 	char c;
-	int x;
-	int i;
-	
-	bool swtchSema = true;
-	
-	FILE *txtfp = fopen("arquivos\\exercicio2.txt", "w");
+	int ut_tot = 0;
+	int ut = tmpF;
+	bool swtchSema = false;
 	
 	do {
 		
-		tempoSema = (rand() % 11) + 10;
-		swtchSema = (swtchSema) ? false : true;
-		i = 0;
-		while (i < tempoSema) {
+		system("cls");
+		printf("Cronometo: 00:00:%02d | Restante: 00:00:%02d\n ", ut_tot, ut);
+		
+		if(swtchSema) printf("\nAberto | ");
+		else printf("\nFechado | ");
+		printf("Goulart: Entrada -> ");
+		exibir_LIFO(fc[0]);
+		printf(" <- Saida");
+		
+		
+		if(!swtchSema) printf("\nAberto | ");
+		else printf("\nFechado | ");
+		printf("Marcondes: Entrada -> ");
+		exibir_LIFO(fc[1]);
+		printf(" <- Saida");
+		
+		Sleep(1000);
+		ut_tot++;
+		ut--;
+		
+		if (!ut) {
+			swtchSema = (swtchSema) ? false : true;
+			ut = (swtchSema) ? tmpA : tmpF;
+		}
+		
+		if (ut_tot % 2 == 0) {
 			
-			if (swtchSema) {
+			c = (rand() % 26) + 65;
+			
+			if (rand() % 10 >= 5) {
 				
-				if (!isEmpty(fc.cont)) {
+				if (!isFull(fc[0].cont))
+					insert(fc[0], c);
 					
-					c = remove(fc);
-					fprintf(txtfp, "Carro: [%C] | Tempo parado: 00:00:%02d\n", c, x + i);
-					saidas++;
-				}
-				
-				if (!isFull(fc.cont) && rand() % 10 >= 5) {
-					
-					c = (rand() % 26) + 65;
-					insert(fc, c);
-				}
-				
 			} else {
 				
-				if (!isFull(fc.cont) && rand() % 10 >= 5) {
-					
-					c = (rand() % 26) + 65;
-					insert(fc, c);
-				}
+				if (!isFull(fc[1].cont))
+					insert(fc[1], c);
+				
 			}
-			
-			
-			system("cls");
-			printf("Cronometo: 00:00:%02d | tempoSemaforo: %d | ", i, tempoSema);
-			
-			if(swtchSema) printf("Aberto\n");
-			else printf("Fechado\n");
-			
-			printf("Entrada -> ");
-			exibir_LIFO(fc);
-			printf(" Saida ->");
-			
-			Sleep(1000);
-			i++;
 		}
-		x = i;
+		
+		if (swtchSema) {
+			
+			if (!isEmpty(fc[0].cont)  && rand() % 10 >= 5) 
+				c = remove(fc[0]);
+		} else {
+			
+			if (!isEmpty(fc[1].cont)  && rand() % 10 >= 5) 
+				c = remove(fc[1]);
+		}
+		
 		
 	} while (!kbhit());
-	
-	fclose(txtfp);
 }

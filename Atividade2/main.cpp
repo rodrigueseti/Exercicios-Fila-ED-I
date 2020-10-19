@@ -9,14 +9,24 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+void menuTempo(int &tmpF, int &tmpA)
+{
+    system("cls");
+	printf("Tempo aberto (Segundos): ");
+	scanf("%d", &tmpA);
+	
+	printf("Tempo fechado (Segundos): ");
+	scanf("%d", &tmpF);
+}
+
+
 char menu()
 {
-    //clrscr();
     system("cls");
-	printf("[1] - Exercicio2 - semaforo");
-	printf("[2] - Alterar tempo de abertura");
-    printf("\n[ESC] - Sair \n");
-    printf("Opcao:");
+	printf("[1] - Executar");
+	printf("\n[2] - Alterar tempo de abertura");
+    printf("\n[ESC] - Sair");
+    printf("\nOpcao: ");
     return getche();
 }
 
@@ -25,6 +35,10 @@ int main(int argc, char** argv)
 {
 	char op;
 	char elemento;
+	system("title Atividade2 - Victor Taveira, Beatriz");
+	
+	int tmpAberto = 25;
+	int tmpFechado = 20;
 	
 	srand(time(NULL));
 	
@@ -36,7 +50,12 @@ int main(int argc, char** argv)
 		switch (op) {
 			
 			case '1' : {
-					exe2();
+					exe2(tmpFechado, tmpAberto);
+				break;
+			}
+			
+			case '2' : {
+					menuTempo(tmpFechado, tmpAberto);
 				break;
 			}
 		}

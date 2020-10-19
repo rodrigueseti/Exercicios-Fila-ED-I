@@ -1,4 +1,4 @@
-#define MAX_FILA 6
+#define MAX_FILA 20
 struct filaCirc 
 {
 	int start;
